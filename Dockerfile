@@ -1,5 +1,7 @@
 FROM ubuntu:14.04
 
+RUN apt-get update
+
 RUN apt-get install git autoconf bison build-essential libssl-dev libyaml-dev \
    libreadline6 libreadline6-dev zlib1g zlib1g-dev -y
 
