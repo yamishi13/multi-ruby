@@ -13,10 +13,6 @@ RUN wget -O - https://github.com/sstephenson/rbenv/archive/master.tar.gz \
       | tar zxf - \
    && mv rbenv-master $HOME/.rbenv
 
-RUN wget -O - https://github.com/sstephenson/rbenv/archive/master.tar.gz \
-      | tar zxf - \
-   && mv rbenv-master $HOME/.rbenv
-
 RUN wget -O - https://github.com/sstephenson/ruby-build/archive/master.tar.gz \
       | tar zxf - \
    && mkdir -p $HOME/.rbenv/plugins \
