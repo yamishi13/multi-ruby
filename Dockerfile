@@ -5,12 +5,12 @@ RUN apt-get update
 RUN apt-get install git autoconf bison build-essential libssl-dev libyaml-dev \
    libreadline6 libreadline6-dev zlib1g zlib1g-dev -y
 
-RUN git clone https://github.com/sstephenson/rbenv.git ~/.rbenv && \
-   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile && \
-   echo 'eval "$(rbenv init -)"' >> ~/.bash_profile && \
-   git clone https://github.com/sstephenson/ruby-build.git \
+RUN bash -c git clone https://github.com/sstephenson/rbenv.git ~/.rbenv && \
+   bash -c echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile && \
+   bash -c echo 'eval "$(rbenv init -)"' >> ~/.bash_profile && \
+   bash -c git clone https://github.com/sstephenson/ruby-build.git \
       ~/.rbenv/plugins/ruby-build && \
-   git clone https://github.com/sstephenson/rbenv-gem-rehash.git \
+   bash -c git clone https://github.com/sstephenson/rbenv-gem-rehash.git \
    ~/.rbenv/plugins/rbenv-gem-rehash
 
 RUN rbenv install 1.8.7-p375
