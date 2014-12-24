@@ -3,9 +3,16 @@ FROM ubuntu:14.04
 MAINTAINER Roberto C Martinez <roberto.mtzarriaga@gmail.com>
 
 RUN apt-get update \
-   && DEBIAN_FRONTEND=noninteractive apt-get -q -y install git \
-      autoconf bison build-essential libssl-dev libyaml-dev \
-      libreadline6 libreadline6-dev zlib1g zlib1g-dev \
+   && apt-get -q -y install software-properties-common \
+   && add-apt-repository ppa:webupd8team/java \
+   && apt-get update \
+   && echo debconf shared/accepted-oracle-license-v1-1 select true | \
+      sudo debconf-set-selections \
+   && echo debconf shared/accepted-oracle-license-v1-1 seen true | \
+      sudo debconf-set-selections \
+   && DEBIAN_FRONTEND=noninteractive apt-get -q -y install git subversion \
+      autoconf bison build-essential libssl-dev libyaml-dev wget \
+      libreadline6 libreadline6-dev zlib1g zlib1g-dev oracle-java7-installer \
    && apt-get -q clean \
    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -18,13 +25,12 @@ RUN git clone https://github.com/sstephenson/rbenv.git ~/.rbenv \
       ~/.rbenv/plugins/rbenv-gem-rehash \
    && rm -r ~/.rbenv/plugins/rbenv-gem-rehash/.git \
    && echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile \
-   && echo 'eval "$(rbenv init -)"' >> ~/.bash_profile \
-   && /bin/bash -c "source ~/.bash_profile"
+   && echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 
-RUN /bin/bash -c "rbenv install 1.8.7-p375"
+RUN ~/.rbenv/bin/rbenv install 1.8.7-p375
 
-RUN /bin/bash -c "rbenv install 1.9.3-p551"
+RUN ~/.rbenv/bin/rbenv install 1.9.3-p551
 
-RUN /bin/bash -c "rbenv install jruby-1.6.8"
+RUN ~/.rbenv/bin/rbenv install jruby-1.6.8
 
-RUN /bin/bash -c "rbenv install jruby-1.7.17"
+RUN ~/.rbenv/bin/rbenv install jruby-1.7.17
