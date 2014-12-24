@@ -19,12 +19,12 @@ RUN git clone https://github.com/sstephenson/rbenv.git ~/.rbenv \
    && rm -r ~/.rbenv/plugins/rbenv-gem-rehash/.git \
    && echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile \
    && echo 'eval "$(rbenv init -)"' >> ~/.bash_profile \
-   && . ~/bash_profile
+   && /bin/bash -c "source ~/.bash_profile"
 
-RUN rbenv install 1.8.7-p375
+RUN /bin/bash -c "rbenv install 1.8.7-p375"
 
-RUN rbenv install 1.9.3-p551
+RUN /bin/bash -c "rbenv install 1.9.3-p551"
 
-RUN rbenv install jruby-1.6.8
+RUN /bin/bash -c "rbenv install jruby-1.6.8"
 
-RUN rbenv install jruby-1.7.17
+RUN /bin/bash -c "rbenv install jruby-1.7.17"
